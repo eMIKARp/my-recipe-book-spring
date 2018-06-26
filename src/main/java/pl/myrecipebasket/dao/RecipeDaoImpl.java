@@ -1,5 +1,11 @@
 package pl.myrecipebasket.dao;
 
-public class RecipeDaoImpl {
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class RecipeDaoImpl extends RecipeDao{
 
 }

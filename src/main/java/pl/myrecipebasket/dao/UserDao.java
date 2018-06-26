@@ -1,5 +1,7 @@
 package pl.myrecipebasket.dao;
 
-public class UserDao {
+import pl.myrecipebasket.model.User;
+
+public class UserDao extends GenericDao<User,Long>{
 
 }

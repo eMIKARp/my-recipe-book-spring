@@ -1,5 +1,7 @@
 package pl.myrecipebasket.dao;
 
-public class CategoryDao {
+import java.util.Locale.Category;
+
+public class CategoryDao extends GenericDao<Category, Long>{
 
 }

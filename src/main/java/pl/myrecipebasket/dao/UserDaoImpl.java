@@ -1,5 +1,11 @@
 package pl.myrecipebasket.dao;
 
-public class UserDaoImpl {
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class UserDaoImpl extends UserDao{
 
 }
