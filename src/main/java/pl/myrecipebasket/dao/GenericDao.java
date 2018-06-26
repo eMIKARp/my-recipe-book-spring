@@ -1,12 +1,40 @@
 package pl.myrecipebasket.dao;
 
-import java.io.Serializable;
-import java.util.List;
+import java.lang.reflect.ParameterizedType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface GenericDao<T, PK extends Serializable> {
 
-	public T create(T newObject);
-	public T read(PK primaryKey);
-	public boolean update(T objectToUpdate);
-	public boolean delete(PK primaryKey);
+@Transactional
+public abstract class GenericDao<T,K> {
+
+	@PersistenceContext
+	private EntityManager entityManager;
+	private Class<T> type;
+	
+	GenericDao() {
+        type =(Class<T>)((ParameterizedType)this.getClass()
+        		.getGenericSuperclass())
+        		.getActualTypeArguments()[0];
+    }
+	
+	public void save(T entity) {
+		entityManager.persist(entity);
+	}
+	
+	public void update(T entity) {
+		entityManager.merge(entity);
+	}
+	
+	public void remove(T entity) {
+		T managedEntity = entityManager.merge(entity);
+		entityManager.remove(managedEntity);
+	}
+	
+	public T get(K key) {
+		T entity = entityManager.find(type, key);
+		return entity;
+	}
+
 }
