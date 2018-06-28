@@ -17,10 +17,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Recipe.findAll", query="SELECT r FROM Recipe r"),
+	@NamedQuery(name="Recipe.deleteAll", query="DELETE FROM Recipe r"),
+	@NamedQuery(name="Recipe.findAllByUsername", query="SELECT r FROM Recipe r WHERE r.user.username=:username"),
+	@NamedQuery(name="Recipe.findAllByCategory", query="SELECT r FROM Recipe r WHERE r.categories.category_name=:category_name"),
+	@NamedQuery(name="Recipe.findAllShared", query="SELECT r FROM Recipe r WHERE r.is_shared=true"),
+	@NamedQuery(name="Recipe.shareRecipe", query="UPDATE Recipe r SET r.is_shared = true WHERE r.id=:recipe_id")
+})
 @Table(name="recipe")
 public class Recipe implements Serializable{
 

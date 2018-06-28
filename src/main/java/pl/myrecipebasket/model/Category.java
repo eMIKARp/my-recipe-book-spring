@@ -9,9 +9,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c"),
+	@NamedQuery(name="Category.deleteAll", query="DELETE FROM Category c")
+})
 @Table(name="category")
 public class Category implements Serializable{
 	

@@ -13,10 +13,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name="User.findByUsername", query="SELECT u FROM User u WHERE u.username=:username"),
+	@NamedQuery(name="User.deleteAll", query="DELETE FROM User u"),
+	@NamedQuery(name="User.findAllFavouriteByUsername", query="SELECT u.favRecipes FROM User user WHERE u.username=:username"),
+	@NamedQuery(name="User.checkIfRecipeIsInFavourite", query="SELECT u.favRecipes FROM User user WHERE u.username=:username AND u.favRecipes.id=:recipe_id"),
+	@NamedQuery(name="User.deleteFromFavourite", query="DELETE FROM User u.favRecipes WHERE u.username=:username AND u.favRecipes.id=:recipe_id")
+	
+})
 @Table(name="user")
 public class User implements Serializable{
 

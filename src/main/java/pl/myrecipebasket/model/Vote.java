@@ -9,10 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Vote.findAll", query="SELECT v FROM Vote v"),
+	@NamedQuery(name="Vote.deleteAll", query="DELETE FROM Vote v"),
+	@NamedQuery(name="Vote.getVoteByUserIdAndRecipeId", query="SELE	CT v FROM Vote v WHERE v.user.id=:user_id AND v.recipe.id=:recipe_id")
+})
 @Table(name="vote")
 public class Vote implements Serializable{
 	
